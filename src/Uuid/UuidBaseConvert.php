@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace DosFarma\BaseConvert\Uuid;
 
+use DosFarma\BaseConvert\ArbitraryLengthBaseConvert;
+
 class UuidBaseConvert
 {
     private const RX_UUID = '/^[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}$/i';
