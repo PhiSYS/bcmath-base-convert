@@ -1,0 +1,22 @@
+{
+  "name": "dosfarma/bcmath-base-convert",
+  "description": "Arbitrary precision base_convert substitution and utilities.",
+  "type": "library",
+  "authors": [
+    {
+      "name": "David Strencsev",
+      "email": "david.strencsev@dosfarma.com"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^7.4",
+    "ext-bcmath": "*",
+    "ext-mbstring": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "DosFarma\\BaseConvert\\": "src/"
+    }
+  }
+}
