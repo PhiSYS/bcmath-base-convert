@@ -13,12 +13,12 @@ class UuidBaseConvert
 
     public static function isUuidString(string $string): bool
     {
-        return 1 === preg_match(self::RX_UUID, $string);
+        return 1 === \preg_match(self::RX_UUID, $string);
     }
 
     public static function isBase64Uuid(string $string): bool
     {
-        return 1 === preg_match(self::RX_BASE64_UUID, $string);
+        return 1 === \preg_match(self::RX_BASE64_UUID, $string);
     }
 
     public static function encodeBase64Uuid(string $uuid): string
@@ -41,7 +41,7 @@ class UuidBaseConvert
 
     public static function isBase10Uuid(string $string): bool
     {
-        return 1 === preg_match(self::RX_BASE10_UUID, $string);
+        return 1 === \preg_match(self::RX_BASE10_UUID, $string);
     }
 
     /**
@@ -68,10 +68,11 @@ class UuidBaseConvert
      */
     public static function decodeBase10Uuid(string $numeric): string
     {
-        $hex = ArbitraryLengthBaseConvert::baseConvert(
-            \substr($numeric, -39),
-            10,
-            16,
+        $hex = \str_pad(
+            ArbitraryLengthBaseConvert::baseConvert($numeric, 10, 16),
+            32,
+            '0',
+            \STR_PAD_LEFT,
         );
 
         return self::hexToUuid($hex);
@@ -79,7 +80,7 @@ class UuidBaseConvert
 
     private static function hexToUuid(string $hex): string
     {
-        if (32 !== strlen($hex)) {
+        if (32 !== \strlen($hex)) {
             throw new \InvalidArgumentException("Invalid UUID length after base conversion.");
         }
 
@@ -96,6 +97,13 @@ class UuidBaseConvert
     {
         if (1 !== \preg_match(self::RX_UUID, $uuid)) {
             throw new \InvalidArgumentException("Invalid UUID for base convert.");
+        }
+    }
+
+    public static function assertBase10Uuid($uuid): void
+    {
+        if (1 !== \preg_match(self::RX_BASE10_UUID, $uuid)) {
+            throw new \InvalidArgumentException("Invalid Base10 encoded UUID.");
         }
     }
 }
