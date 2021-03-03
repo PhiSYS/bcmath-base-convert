@@ -11,7 +11,7 @@ class UuidBaseConvert
     private const RX_BASE10_UUID = '/^0?\d{39}$/';
     private const RX_BASE64_UUID = '%^[a-z0-9+/]{22}={0,2}$%i';
 
-    public function isBase64Uuid(string $string): bool
+    public static function isBase64Uuid(string $string): bool
     {
         return 1 === preg_match(self::RX_BASE64_UUID, $string);
     }
@@ -40,7 +40,7 @@ class UuidBaseConvert
     }
 
     /**
-     * Needs to be padded to 40 char with laeading 0 to fit CODE128C
+     * Needs to be padded to 40 char with leading 0 to fit CODE128C
      */
     public static function encodeBase10Uuid(string $uuid): string
     {
