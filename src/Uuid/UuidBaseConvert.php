@@ -11,6 +11,11 @@ class UuidBaseConvert
     private const RX_BASE10_UUID = '/^0?\d{39}$/';
     private const RX_BASE64_UUID = '%^[a-z0-9+/]{22}={0,2}$%i';
 
+    public static function isUuidString(string $string): bool
+    {
+        return 1 === preg_match(self::RX_UUID, $string);
+    }
+
     public static function isBase64Uuid(string $string): bool
     {
         return 1 === preg_match(self::RX_BASE64_UUID, $string);
@@ -87,7 +92,7 @@ class UuidBaseConvert
         );
     }
 
-    private static function assertUuid(string $uuid): void
+    public static function assertUuid(string $uuid): void
     {
         if (1 !== \preg_match(self::RX_UUID, $uuid)) {
             throw new \InvalidArgumentException("Invalid UUID for base convert.");
