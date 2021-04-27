@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace DosFarma\BaseConvert;
+namespace PhiSYS\BaseConvert;
 
 final class ArbitraryLengthBaseConvert
 {
@@ -30,7 +30,7 @@ final class ArbitraryLengthBaseConvert
 
             while (\bccomp($q, '0', 0) > 0) {
                 $r = \intval(\bcmod($q, (string)$toBase));
-                $result = \base_convert($r, 10, $toBase) . $result;
+                $result = \base_convert((string)$r, 10, $toBase) . $result;
                 $q = \bcdiv($q, (string)$toBase, 0);
             }
         } else {
